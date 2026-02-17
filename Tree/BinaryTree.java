@@ -23,21 +23,21 @@ public class BinaryTree {
     }
 
     private void populate (Scanner scanner, Node root) {
-        System.out.print("Do you want to enter left of " + root.data + ": ");
+        System.out.print("\nDo you want to enter left of " + root.data + ": ");
         boolean left = scanner.nextBoolean();
 
         if (left) {
-            System.out.print("Enter value of left child of " + root.data + ": ");
+            System.out.print("\nEnter value of left child of " + root.data + ": ");
             int value = scanner.nextInt();
             root.left = new Node(value);
             populate(scanner, root.left);
         }
 
-        System.out.print("Do you want to enter right of " + root.data + ": ");
+        System.out.print("\nDo you want to enter right of " + root.data + ": ");
         boolean right = scanner.nextBoolean();
 
         if (right) {
-            System.out.print("Enter value of right child of " + root.data + ": ");
+            System.out.print("\nEnter value of right child of " + root.data + ": ");
             int value = scanner.nextInt();
             root.right = new Node(value);
             populate(scanner, root.right);
@@ -58,11 +58,39 @@ public class BinaryTree {
         display(root.right, indent + "\t");
     }
 
+    private void prettyDisplay () {
+        prettyDisplay(root, 0);
+    }
+
+    private void prettyDisplay (Node root, int level) {
+        if (root == null) {
+            return;
+        }
+
+        prettyDisplay(root.right, level + 1);
+        
+        if (level != 0) {
+            for (int i=0; i < level - 1; i++) {
+                System.out.print("|\t\t");
+            }
+            System.out.println("|----------> " + root.data);
+        }
+        else {
+            System.out.println(root.data);
+        }
+        prettyDisplay(root.left, level + 1);
+    }
+
     public static void main(String[] tejas) {
         Scanner scanner = new Scanner(System.in);
 
         BinaryTree tree = new BinaryTree();
         tree.populate(scanner);
+        System.out.println();
+
         tree.display();
+        System.out.println();
+
+        tree.prettyDisplay();
     }
 }
