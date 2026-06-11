@@ -1,7 +1,6 @@
 package Tree;
 
 public class AVLTree {
-    
     private static class  Node {
         private int value;
         private int height;
@@ -161,7 +160,7 @@ public class AVLTree {
     public static void main(String[] args) {
         AVLTree tree = new AVLTree();
         
-        for (int i=1; i<=50; i++) {
+        for (int i=1; i<=1000; i++) {
             tree.insert(i);
         }
 
